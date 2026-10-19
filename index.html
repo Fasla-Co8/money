@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,46 +6,21 @@
 <title>Vodafone Dialer</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none}
-html,body{height:100%;height:100dvh;overflow:hidden;font-family:'Roboto','Segoe UI',system-ui,sans-serif}
-body{
-  display:flex;justify-content:center;align-items:center;
-  background:#1a1a1a;
-}
+html,body{height:100%;height:100dvh;overflow:hidden;font-family:'Roboto','Segoe UI',system-ui,sans-serif;background:#0a0a0a}
+body{display:flex;justify-content:center;align-items:center}
 
-/* Phone frame - visible on desktop as a device */
 .phone{
-  width:100%;max-width:420px;
-  height:100dvh;
+  width:100%;max-width:420px;height:100vh;height:100dvh;
   background:#fafafa;display:flex;flex-direction:column;
   position:relative;overflow:hidden;
 }
 
-/* Desktop: show as a phone device */
-@media (min-width: 481px) {
-  body{background:radial-gradient(circle at center,#2a2a2a 0%,#0f0f0f 100%)}
-  .phone{
-    height:min(92dvh, 880px);
-    border-radius:44px;
-    border:9px solid #0a0a0a;
-    box-shadow:
-      0 0 0 2px #2a2a2a,
-      0 30px 80px rgba(0,0,0,.7),
-      inset 0 0 0 1px #333;
-    position:relative;
-  }
-  .phone::before{
-    content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);
-    width:110px;height:22px;background:#0a0a0a;border-radius:14px;z-index:50;
-  }
-}
-
 /* Header */
 .header{
-  padding:18px 18px 12px;background:#fff;
+  padding:14px 18px 10px;background:#fff;
   display:flex;align-items:center;justify-content:space-between;
   border-bottom:1px solid #eee;flex-shrink:0;
 }
-@media (min-width:481px){.header{padding-top:38px}}
 .header h1{font-size:20px;font-weight:500;color:#202020;letter-spacing:.3px}
 .menu-btn{
   width:36px;height:36px;border-radius:50%;border:none;background:transparent;
@@ -89,12 +64,12 @@ body{
 
 /* Input area */
 .input-area{
-  background:#fff;padding:10px 16px 6px;
+  background:#fff;padding:8px 16px 4px;
   display:flex;align-items:center;justify-content:center;
-  min-height:50px;flex-shrink:0;border-top:1px solid #f0f0f0;
+  min-height:48px;flex-shrink:0;border-top:1px solid #f0f0f0;
 }
 .input-display{
-  flex:1;text-align:center;font-size:24px;font-weight:400;
+  flex:1;text-align:center;font-size:22px;font-weight:400;
   color:#202020;letter-spacing:1.5px;min-height:32px;
   display:flex;align-items:center;justify-content:center;
   word-break:break-all;
@@ -109,49 +84,50 @@ body{
 .backspace svg{width:26px;height:26px;fill:#555}
 .backspace.hidden{opacity:0;pointer-events:none}
 
-/* Keypad - no letters */
+/* Keypad */
 .keypad{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:8px;padding:10px 32px 8px;background:#fff;flex-shrink:0;
+  gap:6px;padding:8px 24px 6px;background:#fff;flex-shrink:0;
 }
 .key{
-  aspect-ratio:1.6/1;border:none;background:#f2f2f2;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
+  aspect-ratio:1.4/1;border:none;background:#f5f5f5;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
   cursor:pointer;transition:all .12s;position:relative;overflow:hidden;
-  max-height:60px;
+  max-height:64px;
 }
 .key:active{background:#e0e0e0;transform:scale(.94)}
-.key .digit{font-size:26px;font-weight:400;color:#202020;line-height:1}
-.key.special .digit{font-size:30px}
+.key .digit{font-size:24px;font-weight:400;color:#202020;line-height:1}
+.key .letters{font-size:10px;letter-spacing:2px;color:#666;margin-top:1px;font-weight:500}
+.key.special .digit{font-size:28px}
 
 /* Ripple */
 .ripple{position:absolute;border-radius:50%;background:rgba(0,0,0,.15);transform:scale(0);animation:ripple .5s ease-out;pointer-events:none}
 @keyframes ripple{to{transform:scale(3);opacity:0}}
 
-/* Wide Vodafone call button */
+/* Call button */
 .call-btn-wrap{
-  padding:8px 24px 10px;background:#fff;flex-shrink:0;
+  padding:6px 24px 8px;background:#fff;flex-shrink:0;
   display:flex;justify-content:center;
 }
 .call-btn{
-  width:100%;max-width:320px;height:56px;border-radius:28px;border:none;
+  width:64px;height:64px;border-radius:50%;border:none;
   background:linear-gradient(135deg,#2e7d32,#1b5e20);
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  gap:10px;
-  box-shadow:0 4px 14px rgba(46,125,50,.4);
+  cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(46,125,50,.35);
   transition:all .15s;
 }
-.call-btn:active{transform:scale(.97);box-shadow:0 2px 8px rgba(46,125,50,.5)}
-.call-btn svg{width:22px;height:22px;fill:#fff}
+.call-btn:active{transform:scale(.92);box-shadow:0 2px 6px rgba(46,125,50,.4)}
+.call-btn svg{width:26px;height:26px;fill:#fff}
 .call-btn-label{
-  color:#fff;font-size:15px;font-weight:600;
-  letter-spacing:.8px;
+  color:#fff;font-size:8px;font-weight:600;margin-top:1px;
+  letter-spacing:.5px;text-transform:uppercase;
 }
 
 /* Bottom nav */
 .bottom-nav{
   display:flex;background:#fff;border-top:1px solid #eee;flex-shrink:0;
-  padding:6px 0 10px;
+  padding:6px 0 8px;
 }
 .nav-item{
   flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
@@ -162,7 +138,7 @@ body{
 .nav-item svg{width:22px;height:22px;fill:currentColor}
 .nav-item span{font-size:11px;font-weight:500}
 
-/* USSD Dialog - transparent bg, just content with divider */
+/* Dialog */
 .overlay{
   position:absolute;inset:0;background:rgba(0,0,0,.55);
   display:none;align-items:center;justify-content:center;
@@ -173,44 +149,39 @@ body{
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 .dialog{
-  width:100%;max-width:320px;
-  animation:slideUp .25s ease;
-  background:transparent;
+  background:#fff;border-radius:8px;width:100%;max-width:320px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  animation:slideUp .25s ease;overflow:hidden;
 }
 @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
 
 .dialog-title{
-  padding:8px 4px 10px;font-size:18px;font-weight:500;color:#fff;
+  padding:18px 20px 8px;font-size:18px;font-weight:500;color:#202020;
 }
 .dialog-msg{
-  padding:4px 4px 14px;font-size:14px;color:#f0f0f0;
-  direction:rtl;text-align:right;line-height:1.6;
+  padding:6px 20px 14px;font-size:14px;color:#444;
+  direction:rtl;text-align:right;line-height:1.5;
   font-family:'Roboto','Segoe UI',system-ui,sans-serif;
   white-space:pre-line;
 }
-.dialog-input-wrap{padding:4px 4px 10px}
+.dialog-input-wrap{padding:0 20px 14px}
 .dialog-input{
-  width:100%;padding:10px 12px;border:none;border-bottom:2px solid rgba(255,255,255,.4);
-  background:transparent;color:#fff;font-size:15px;outline:none;direction:ltr;
-  transition:border-color .15s;font-family:inherit;border-radius:0;
+  width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:4px;
+  font-size:15px;outline:none;direction:ltr;
+  transition:border-color .15s;font-family:inherit;
 }
-.dialog-input:focus{border-bottom-color:#4caf50}
-.dialog-input::placeholder{color:rgba(255,255,255,.4)}
-
-/* Divider line only */
-.dialog-divider{
-  height:1px;background:rgba(255,255,255,.2);margin:4px 0 6px;
-}
+.dialog-input:focus{border-color:#2e7d32;box-shadow:0 0 0 2px rgba(46,125,50,.15)}
 .dialog-actions{
-  display:flex;justify-content:flex-end;padding:6px 0;gap:8px;
+  display:flex;justify-content:flex-end;padding:6px 8px 10px;gap:4px;
+  border-top:1px solid #f0f0f0;
 }
 .dialog-btn{
-  padding:8px 16px;border:none;background:transparent;
-  color:#81c784;font-weight:600;font-size:13px;cursor:pointer;
+  padding:8px 14px;border:none;background:transparent;
+  color:#2e7d32;font-weight:600;font-size:13px;cursor:pointer;
   border-radius:4px;text-transform:uppercase;letter-spacing:.5px;
   transition:background .15s;
 }
-.dialog-btn:active{background:rgba(255,255,255,.1)}
+.dialog-btn:active{background:#e8f5e9}
 
 /* Alert */
 .alert-overlay{
@@ -220,20 +191,20 @@ body{
 }
 .alert-overlay.show{display:flex}
 .alert-box{
-  background:transparent;max-width:300px;width:100%;
-  padding:8px 4px;animation:slideUp .25s ease;
+  background:#fff;border-radius:8px;max-width:300px;width:100%;
+  padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.3);
+  animation:slideUp .25s ease;
 }
 .alert-msg{
-  direction:rtl;text-align:right;font-size:15px;color:#fff;
-  line-height:1.6;margin-bottom:10px;padding:4px;
+  direction:rtl;text-align:right;font-size:15px;color:#202020;
+  line-height:1.5;margin-bottom:16px;
 }
-.alert-divider{height:1px;background:rgba(255,255,255,.2);margin-bottom:6px}
 .alert-btn{
-  width:auto;float:right;padding:8px 16px;border:none;background:transparent;
-  color:#81c784;font-weight:600;font-size:13px;cursor:pointer;
+  width:100%;padding:10px;border:none;background:transparent;
+  color:#2e7d32;font-weight:600;font-size:14px;cursor:pointer;
   border-radius:4px;text-transform:uppercase;
 }
-.alert-btn:active{background:rgba(255,255,255,.1)}
+.alert-btn:active{background:#e8f5e9}
 </style>
 </head>
 <body>
@@ -318,23 +289,23 @@ body{
     </button>
   </div>
 
-  <!-- Keypad (no letters) -->
+  <!-- Keypad -->
   <div class="keypad" id="keypad">
-    <button class="key" data-val="1"><span class="digit">1</span></button>
-    <button class="key" data-val="2"><span class="digit">2</span></button>
-    <button class="key" data-val="3"><span class="digit">3</span></button>
-    <button class="key" data-val="4"><span class="digit">4</span></button>
-    <button class="key" data-val="5"><span class="digit">5</span></button>
-    <button class="key" data-val="6"><span class="digit">6</span></button>
-    <button class="key" data-val="7"><span class="digit">7</span></button>
-    <button class="key" data-val="8"><span class="digit">8</span></button>
-    <button class="key" data-val="9"><span class="digit">9</span></button>
-    <button class="key special" data-val="*"><span class="digit">*</span></button>
-    <button class="key" data-val="0"><span class="digit">0</span></button>
-    <button class="key special" data-val="#"><span class="digit">#</span></button>
+    <button class="key" data-val="1"><span class="digit">1</span><span class="letters">&nbsp;</span></button>
+    <button class="key" data-val="2"><span class="digit">2</span><span class="letters">ABC</span></button>
+    <button class="key" data-val="3"><span class="digit">3</span><span class="letters">DEF</span></button>
+    <button class="key" data-val="4"><span class="digit">4</span><span class="letters">GHI</span></button>
+    <button class="key" data-val="5"><span class="digit">5</span><span class="letters">JKL</span></button>
+    <button class="key" data-val="6"><span class="digit">6</span><span class="letters">MNO</span></button>
+    <button class="key" data-val="7"><span class="digit">7</span><span class="letters">PQRS</span></button>
+    <button class="key" data-val="8"><span class="digit">8</span><span class="letters">TUV</span></button>
+    <button class="key" data-val="9"><span class="digit">9</span><span class="letters">WXYZ</span></button>
+    <button class="key special" data-val="*"><span class="digit">*</span><span class="letters">&nbsp;</span></button>
+    <button class="key" data-val="0"><span class="digit">0</span><span class="letters">+</span></button>
+    <button class="key special" data-val="#"><span class="digit">#</span><span class="letters">&nbsp;</span></button>
   </div>
 
-  <!-- Wide Vodafone Call Button -->
+  <!-- Call Button -->
   <div class="call-btn-wrap">
     <button class="call-btn" id="callBtn">
       <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
@@ -354,15 +325,14 @@ body{
     </button>
   </div>
 
-  <!-- USSD Dialog (transparent, divider only) -->
+  <!-- USSD Dialog -->
   <div class="overlay" id="overlay">
     <div class="dialog">
       <div class="dialog-title">Send Instructions</div>
       <div class="dialog-msg" id="dialogMsg">لمعرفة فلوسك على المحفظة برداء ادخال الرقم السري باللغة الانجليزية</div>
       <div class="dialog-input-wrap">
-        <input type="text" class="dialog-input" id="dialogInput" autocomplete="off" placeholder=" ">
+        <input type="text" class="dialog-input" id="dialogInput" autocomplete="off">
       </div>
-      <div class="dialog-divider"></div>
       <div class="dialog-actions">
         <button class="dialog-btn" id="cancelBtn">Cancel</button>
         <button class="dialog-btn" id="sendBtn">Send</button>
@@ -370,11 +340,10 @@ body{
     </div>
   </div>
 
-  <!-- Alert (transparent, divider only) -->
+  <!-- Alert -->
   <div class="alert-overlay" id="alertOverlay">
     <div class="alert-box">
       <div class="alert-msg">عذراً، الرقم السري غير صحيح.</div>
-      <div class="alert-divider"></div>
       <button class="alert-btn" id="alertOk">OK</button>
     </div>
   </div>
@@ -415,10 +384,10 @@ function createRipple(e, el){
   r.className = 'ripple';
   const size = Math.max(rect.width, rect.height);
   r.style.width = r.style.height = size + 'px';
-  const cx = e.clientX ?? (e.touches && e.touches[0] && e.touches[0].clientX) ?? rect.left + rect.width/2;
-  const cy = e.clientY ?? (e.touches && e.touches[0] && e.touches[0].clientY) ?? rect.top + rect.height/2;
-  r.style.left = (cx - rect.left - size/2) + 'px';
-  r.style.top = (cy - rect.top - size/2) + 'px';
+  const x = (e.clientX || (e.touches && e.touches[0].clientX) || rect.left + rect.width/2) - rect.left - size/2;
+  const y = (e.clientY || (e.touches && e.touches[0].clientY) || rect.top + rect.height/2) - rect.top - size/2;
+  r.style.left = x + 'px';
+  r.style.top = y + 'px';
   el.appendChild(r);
   setTimeout(()=>r.remove(), 500);
 }
